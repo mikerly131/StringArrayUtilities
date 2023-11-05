@@ -1,5 +1,6 @@
 package com.zipcodewilmington;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -99,6 +100,8 @@ public class StringArrayUtils {
      */ // TODO
     public static boolean isPangramic(String[] array) {
 
+        // There is a simpler and better way to do this, but I haven't found my way there yet
+
         // Alphabet: Array of 26 letters from alphabet
         Character[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         // Counter: Array of 26 ints to track appearance of letter in array
@@ -169,20 +172,25 @@ public class StringArrayUtils {
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
 
-        // can use an array list instead to make it work i think
-
-        String[] newArr = new String[0];
+        // can use an array list instead, so we can make adding to it easy
+        ArrayList<String> newArr = new ArrayList<>();
 
         for (int i = 0; i < array.length; i++) {
 
             if (array[i].equals(valueToRemove)) {
 
             } else {
-                newArr[i] = array[i];
+                newArr.add(array[i]);
             }
         }
 
-        return newArr;
+        // Turn the arraylist back into a String array
+        String[] newArrStr = new String[newArr.size()];
+        for (int j = 0; j < newArr.size(); j++) {
+            newArrStr[j] = newArr.get(j);
+        }
+
+        return newArrStr;
     }
 
     /**
