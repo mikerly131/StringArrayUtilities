@@ -254,7 +254,39 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
    public static String[] packConsecutiveDuplicates(String[] array) {
-       return null;
+
+       /* Planning:
+          Can I split the array, if turned into string, by some regex or something when character changes?  Yes, but above my understanding.
+          So, what about...
+          Use a string builder to build matched strings, separate by spaces
+          Get the string from string builder then split it by spaces
+          Convert back to String[] array and return
+          Tricky part is figuring out how many times to loop if checking one element from array to next
+          and not go out of bounds
+       */
+
+       // Make a string builder to build out a string of groups of matching letters
+       // ex: array = ["a", "a", "b", "c", "c", "d"] -> stringbuilder = "aa b cc d"
+       StringBuilder groupedLetters = new StringBuilder();
+       groupedLetters.append(array[0]);
+
+       // Still need to loop array length -1 times, but starting at 1 to make conditional work, so use array.length in loop condition
+       for (int i = 1; i < (array.length); i++) {
+
+                String letter2 = array[i];
+                String letter1 = array[i-1];
+
+                if (letter1.equals(letter2)) {
+                    groupedLetters.append(letter2);
+                } else {
+                    groupedLetters.append(" ");
+                    groupedLetters.append(letter2);
+                }
+       }
+
+       String newArrStr = groupedLetters.toString();
+       String[] newArr = newArrStr.split(" ");
+       return newArr;
    }
 
 
