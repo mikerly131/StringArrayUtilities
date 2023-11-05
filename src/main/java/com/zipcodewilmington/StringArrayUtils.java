@@ -101,6 +101,7 @@ public class StringArrayUtils {
     public static boolean isPangramic(String[] array) {
 
         // There is a simpler and better way to do this, but I haven't found my way there yet
+        // Solving this like a checklist...aka using a counter
 
         // Alphabet: Array of 26 letters from alphabet
         Character[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -198,7 +199,54 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-    return null;
+
+        // Make an array list to hold non-consecutive duplicate strings from array
+        ArrayList<String> newArr = new ArrayList<>();
+
+        // LOOP: Check element 0 to element [length -1], don't go out of bounds of array in conditional
+        for (int i = 0; i < (array.length - 1); i++) {
+
+            //CONDITIONAL:  If element n == element n+1 is False, add it to new array
+            if (array[i].equals(array[i + 1])) {
+
+            } else {
+                newArr.add(array[i]);
+            }
+        }
+
+        // Now add the last element of the array.  The prior duplicates would not have been added anyway.
+        newArr.add(array[array.length-1]);
+
+        // BAD LOGIC BELOW - Always need to add the last element from original array.
+        /*
+        // If last element of array is not equal to previous element, add last element
+        for (int j = array.length-1; j > array.length-2; j--) {
+
+            if(array[j].equals(array[j-1])) {
+
+            } else {
+                newArr.add(array[j]);
+            }
+        }
+        */
+
+        /*
+        //CONDITIONAL:  If the last 2 elements of the array are not equal, add the LAST element
+        if (array[array.length-1].equals(array[array.length-2])) {
+        } else {
+            newArr.add(array[array.length-1]);
+        }
+
+         */
+
+        // Convert the array list to array to match expected return for test
+        String[] newArrStr = new String[newArr.size()];
+        for (int j = 0; j < newArr.size(); j++) {
+            newArrStr[j] = newArr.get(j);
+        }
+
+
+    return newArrStr;
     }
 
     /**
